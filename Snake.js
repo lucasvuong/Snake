@@ -5,6 +5,7 @@ let oppositeDirection = "left";
 function setup() {
     createCanvas(400, 400);
     Snake.push([200, 100], [190, 100]);
+    frameRate(2);
 }
 
 function draw() {
