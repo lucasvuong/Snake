@@ -5,7 +5,6 @@ let oppositeDirection = "left";
 function setup() {
     createCanvas(400, 400);
     Snake.push([200, 100], [190, 100]);
-    frameRate(2);
 }
 
 function draw() {
@@ -22,16 +21,19 @@ function moveSnake() {
     for (let i = Snake.length - 1; i > 0; i--) {
         Snake[i] = Snake[i - 1];
     }
-    let head = Snake[0];
     switch (direction) {
         case "up":
-            head[1] -= 10;
+            Snake[0][1] -= 10;
+            break;
         case "left":
-            head[0] -= 10;
+            Snake[0][0] -= 10;
+            break;
         case "down":
-            head[1] += 10;
+            Snake[0][1] += 10;
+            break;
         case "right":
-            head[0] += 10;
+            Snake[0][0] += 10;
+            break;
     }
 }
 
