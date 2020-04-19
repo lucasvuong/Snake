@@ -3,5 +3,6 @@ function setup() {
 }
 
 function draw() {
+    resizeCanvas(windowWidth, windowHeight);
     background(0);
 }
