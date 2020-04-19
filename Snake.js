@@ -24,11 +24,11 @@ function moveSnake() {
     let head = Snake[0];
     switch (direction) {
         case "up":
-            head[1] += 10;
+            head[1] -= 10;
         case "left":
             head[0] -= 10;
         case "down":
-            head[1] -= 10;
+            head[1] += 10;
         case "right":
             head[0] += 10;
     }
