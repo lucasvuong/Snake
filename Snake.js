@@ -19,7 +19,7 @@ function draw() {
 }
 
 function moveSnake() {
-    for (let i = 1; i < Snake.length; i++) {
+    for (let i = Snake.length - 1; i > 0; i--) {
         Snake[i] = Snake[i - 1];
     }
     let head = Snake[0];
@@ -36,15 +36,17 @@ function moveSnake() {
 }
 
 function keyPressed() {
-    if (oppositeDirection != key) {
-        if (key == "ArrowUp") {
-            direction = "up";
-        } else if (key == "ArrowLeft") {
-            direction = "left";
-        } else if (key == "ArrowDown") {
-            direction = "down";
-        } else if (key == "ArrowRight") {
-            direction = "right";
-        }
+    if (key == "ArrowUp" && oppositeDirection != "up") {
+        direction = "up";
+        oppositeDirection = "down";
+    } else if (key == "ArrowLeft" && oppositeDirection != "left") {
+        direction = "left";
+        oppositeDirection = "right";
+    } else if (key == "ArrowDown" && oppositeDirection != "down") {
+        direction = "down";
+        oppositeDirection = "up";
+    } else if (key == "ArrowRight" && oppositeDirection != "right") {
+        direction = "right";
+        oppositeDirection = "left";
     }
 }
