@@ -9,7 +9,6 @@ function setup() {
     Snake.push([200, 100], [190, 100]);
 
     foodPos.push(floor(random(39)) * 10, floor(random(39)) * 10);
-    previousTail = Snake[Snake.length - 1];
     frameRate(5);
 }
 
@@ -27,7 +26,8 @@ function draw() {
         Snake.push(previousTail);
         foodPos = [floor(random(39)) * 10, floor(random(39)) * 10];
     }
-    previousTail = Snake[Snake.length - 1];
+    previousTail = Snake.pop();
+    Snake.push(previousTail);
 }
 
 function moveSnake() {
@@ -68,7 +68,7 @@ function keyPressed() {
 }
 
 function foodGotEaten() {
-    if (foodPos[0][0] == Snake[0] && foodPos[0][1] == Snake[1]) {
+    if (foodPos[0] == Snake[0][0] && foodPos[1] == Snake[0][1]) {
         return true;
     } else {
         return false;
