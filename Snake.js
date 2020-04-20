@@ -26,8 +26,10 @@ function draw() {
         Snake.push(previousTail);
         foodPos = [floor(random(39)) * 10, floor(random(39)) * 10];
     }
-    previousTail = Snake.pop();
-    Snake.push(previousTail);
+    previousTail = [
+        0 + Snake[Snake.length - 1][0],
+        0 + Snake[Snake.length - 1][1],
+    ];
 }
 
 function moveSnake() {
