@@ -3,6 +3,7 @@ let direction = "right";
 let oppositeDirection = "left";
 let foodPos = [];
 let previousTail;
+let gameOver = false;
 
 function setup() {
     createCanvas(400, 400);
@@ -14,22 +15,30 @@ function setup() {
 
 function draw() {
     background(0);
-    Snake.forEach((element) => {
-        fill(255);
-        noStroke();
-        rect(element[0], element[1], 10, 10);
-    });
-    fill(255, 0, 0);
-    rect(foodPos[0], foodPos[1], 10, 10);
-    moveSnake();
-    if (foodGotEaten()) {
-        Snake.push(previousTail);
-        foodPos = [floor(random(39)) * 10, floor(random(39)) * 10];
+    if (!gameOver) {
+        Snake.forEach((element) => {
+            fill(255);
+            noStroke();
+            rect(element[0], element[1], 10, 10);
+        });
+        fill(255, 0, 0);
+        rect(foodPos[0], foodPos[1], 10, 10);
+        moveSnake();
+        if (foodGotEaten()) {
+            Snake.push(previousTail);
+            foodPos = [floor(random(39)) * 10, floor(random(39)) * 10];
+        }
+        if (snakeCrashedIntoWall()) {
+            gameOver = true;
+            if (promt("Game Over. Play again? (yes/no)") == "yes") {
+                gameOver = false;
+            }
+        }
+        previousTail = [
+            0 + Snake[Snake.length - 1][0],
+            0 + Snake[Snake.length - 1][1],
+        ];
     }
-    previousTail = [
-        0 + Snake[Snake.length - 1][0],
-        0 + Snake[Snake.length - 1][1],
-    ];
 }
 
 function moveSnake() {
@@ -70,9 +79,14 @@ function keyPressed() {
 }
 
 function foodGotEaten() {
-    if (foodPos[0] == Snake[0][0] && foodPos[1] == Snake[0][1]) {
-        return true;
-    } else {
-        return false;
-    }
+    return foodPos[0] == Snake[0][0] && foodPos[1] == Snake[0][1];
+}
+
+function snakeCrashedIntoWall() {
+    return (
+        Snake[0][0] < 0 ||
+        Snake[0][0] > 400 ||
+        Snake[0][1] < 0 ||
+        Snake[0][1] > 400
+    );
 }
