@@ -93,9 +93,6 @@ function moveSnake() {
             Snake[0][0] += 10;
             break;
     }
-    if (0 in Snake[0]) {
-        console.log(Snake);
-    }
 }
 
 function keyPressed() {
