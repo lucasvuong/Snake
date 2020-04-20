@@ -4,6 +4,9 @@ let oppositeDirection = "left";
 let foodPos = [];
 let previousTail;
 let gameOver = false;
+let angle = 0;
+let sinThing = 0;
+let keyPressedYet = false;
 
 function setup() {
     createCanvas(400, 400);
@@ -30,14 +33,44 @@ function draw() {
         }
         if (snakeCrashedIntoWall()) {
             gameOver = true;
-            if (promt("Game Over. Play again? (yes/no)") == "yes") {
+            if (prompt("Game Over. Play again? (yes/no)") == "yes") {
                 gameOver = false;
+                Snake = [
+                    [200, 100],
+                    [190, 100],
+                ];
+                direction = "right";
+                oppositeDirection = "left";
+                foodPos = [floor(random(39)) * 10, floor(random(39)) * 10];
             }
         }
         previousTail = [
             0 + Snake[Snake.length - 1][0],
             0 + Snake[Snake.length - 1][1],
         ];
+        keyPressedYet = false;
+    } else {
+        frameRate(60);
+        push();
+        translate(width / 2, height / 2);
+        rotate(radians(angle));
+        rectMode(CENTER);
+        rect(0, 0, 100, 100);
+        for (let i = 0; i < 4; i++) {
+            push();
+            translate(sinThing % 100, 0);
+            rotate(angle);
+            rect(0, 0, 10, 10);
+            rotate(-angle);
+            translate(-(sinThing % 100) * 2, 0);
+            rotate(angle);
+            rect(0, 0, 10, 10);
+            pop();
+            rotate(radians(45));
+        }
+        pop();
+        angle++;
+        sinThing++;
     }
 }
 
@@ -63,18 +96,21 @@ function moveSnake() {
 }
 
 function keyPressed() {
-    if (key == "ArrowUp" && oppositeDirection != "up") {
-        direction = "up";
-        oppositeDirection = "down";
-    } else if (key == "ArrowLeft" && oppositeDirection != "left") {
-        direction = "left";
-        oppositeDirection = "right";
-    } else if (key == "ArrowDown" && oppositeDirection != "down") {
-        direction = "down";
-        oppositeDirection = "up";
-    } else if (key == "ArrowRight" && oppositeDirection != "right") {
-        direction = "right";
-        oppositeDirection = "left";
+    if (!keyPressedYet) {
+        if (key == "ArrowUp" && oppositeDirection != "up") {
+            direction = "up";
+            oppositeDirection = "down";
+        } else if (key == "ArrowLeft" && oppositeDirection != "left") {
+            direction = "left";
+            oppositeDirection = "right";
+        } else if (key == "ArrowDown" && oppositeDirection != "down") {
+            direction = "down";
+            oppositeDirection = "up";
+        } else if (key == "ArrowRight" && oppositeDirection != "right") {
+            direction = "right";
+            oppositeDirection = "left";
+        }
+        keyPressedYet = true;
     }
 }
 
