@@ -66,7 +66,7 @@ function draw() {
             rotate(angle);
             rect(0, 0, 10, 10);
             pop();
-            rotate(radians(45));
+            rotate(QUARTER_PI);
         }
         pop();
         angle++;
@@ -85,6 +85,7 @@ function moveSnake() {
             break;
         case "left":
             Snake[0][0] -= 10;
+            ``;
             break;
         case "down":
             Snake[0][1] += 10;
@@ -129,7 +130,7 @@ function snakeCrashedIntoWall() {
 
 function snakeColidedWithSelf() {
     for (let i = 1; i < Snake.length; i++) {
-        if (Snake[0] == Snake[i]) {
+        if (Snake[0][0] == Snake[i][0] && Snake[0][1] == Snake[i][1]) {
             return true;
         }
     }
