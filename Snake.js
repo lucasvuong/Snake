@@ -32,7 +32,6 @@ function draw() {
             foodPos = [floor(random(39)) * 10, floor(random(39)) * 10];
         }
         if (snakeCrashedIntoWall()) {
-            console.log(Snake);
             gameOver = true;
             if (prompt("Game Over. Play again? (yes/no)") == "yes") {
                 gameOver = false;
