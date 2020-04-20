@@ -31,7 +31,7 @@ function draw() {
             Snake.push(previousTail);
             foodPos = [floor(random(39)) * 10, floor(random(39)) * 10];
         }
-        if (snakeCrashedIntoWall()) {
+        if (snakeCrashedIntoWall() || snakeColidedWithSelf()) {
             gameOver = true;
             if (prompt("Game Over. Play again? (yes/no)") == "yes") {
                 gameOver = false;
@@ -128,4 +128,13 @@ function snakeCrashedIntoWall() {
         Snake[0][1] < 0 ||
         Snake[0][1] > 400
     );
+}
+
+function snakeColidedWithSelf() {
+    for (let i = 1; i < Snake.length; i++) {
+        if (Snake[0] == Snake[i]) {
+            return true;
+        }
+    }
+    return false;
 }
