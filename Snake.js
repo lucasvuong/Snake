@@ -18,8 +18,9 @@ function draw() {
 }
 
 function moveSnake() {
-    for (let i = Snake.length - 1; i > 0; i--) {
-        Snake[i] = Snake[i - 1];
+    for (let i = Snake.length - 1; i >= 1; i--) {
+        Snake[i][0] = 0 + Snake[i - 1][0];
+        Snake[i][1] = 0 + Snake[i - 1][1];
     }
     switch (direction) {
         case "up":
